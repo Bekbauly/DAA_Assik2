@@ -1,103 +1,186 @@
-# Assignment 2 – Advanced Sorting Algorithms  
+Shell Sort Algorithm - Report
 
-**Student A:** Galymzhan Bekbauly  
-**Algorithm:** Shell Sort (Shell, Knuth, and Sedgewick gap sequences)  
+Student B, Pair 2: Advanced Sorting Algorithms
+Algorithm: Shell Sort with Multiple Gap Sequences (Shell, Knuth, Sedgewick)
 
----
+📋 Algorithm Overview
 
-## 1. Algorithm Overview  
+Shell Sort is an in-place comparison-based sorting algorithm that generalizes insertion sort to allow the exchange of items that are far apart. The algorithm improves on insertion sort by allowing the comparison and exchange of elements that are distant from each other, reducing the amount of shifting needed when compared to the standard insertion sort.
 
-Shell Sort is an improved version of Insertion Sort that allows exchanging elements that are far apart.  
-It works by sorting elements at a certain gap distance apart, then gradually reducing the gap until it becomes 1.  
-This improves efficiency for medium and large arrays.  
+Key Features:
 
-**Implemented gap sequences:**  
-- **Shell’s sequence** – n/2, n/4, …, 1  
-- **Knuth’s sequence** – (3^k - 1) / 2  
-- **Sedgewick’s sequence** – hybrid sequence with theoretical O(n^(4/3)) performance  
+✅ In-place sorting: O(1) auxiliary space.
 
----
+✅ Multiple gap sequences: Uses Shell, Knuth, and Sedgewick gap sequences to optimize sorting performance.
 
-## 2. Complexity Analysis  
+✅ Improved performance over Insertion Sort: Reduces the number of comparisons and swaps in practice.
 
-| Case | Time Complexity | Space Complexity |
-|------|----------------|----------------|
-| Best | Ω(n log n) | O(1) |
-| Average | Θ(n^1.25) | O(1) |
-| Worst | O(n²) | O(1) |
+✅ Adaptable: You can experiment with different gap sequences for varying performance results.
 
-Shell Sort is **in-place**, requiring no additional memory beyond a few variables.  
+🧮 Complexity Analysis
+Time Complexity:
+Case	Complexity	Explanation
+Best Case	Θ(n log n)	When the input is nearly sorted, Shell Sort is efficient with small gaps.
+Average Case	Θ(n^3/2)	The performance improves with better gap sequences like Knuth or Sedgewick.
+Worst Case	Θ(n^2)	For Shell's original gap sequence, the worst case performance is quadratic.
+Why Θ(n^2) in the worst case?
 
----
+Build heap: O(n) using the bottom-up approach.
 
-## 3. Experimental Results  
+Gap sequence: Performance depends on the sequence chosen. For Shell, the worst case is O(n^2), but for Knuth and Sedgewick, it can be much better.
 
-| Sequence | n | Avg Time (ms) | Comparisons | Swaps | Array Accesses |
-|-----------|----------------|--------------|-------------|-------------|----------------|
-| **SHELL** | 10,000 | 4 | 263,000 | 150,000 | 650,000 |
-| **KNUTH** | 10,000 | 3 | 239,000 | 168,000 | 560,000 |
-| **SEDGEWICK** | 10,000 | 2 | 197,000 | 109,000 | 490,000 |
+Space Complexity:
 
-> **Note:** The values above are the average of three runs on random data.  
-> Detailed raw results are available in `docs/results.csv`.  
+Auxiliary Space: Θ(1) - sorts in-place.
 
----
+Total Space: Θ(n) - input array only.
 
-## 4. Analysis  
+🚀 Quick Start
+Prerequisites:
 
-Based on the benchmark results:  
+Java 17 or higher
 
-- **Sedgewick’s gap sequence** achieved the best performance — fastest execution and fewest operations.  
-- **Knuth’s sequence** performed slightly slower but still much better than the original Shell’s.  
-- **Shell’s sequence** had the highest time and operation count.  
+Maven 3.6+
 
-These findings match the theoretical predictions: better-designed gap sequences reduce both time and cache misses.  
+Git
 
----
+Build and Run:
+# Clone repository
+git clone <repository-url>
+cd assignment2-shellsort
 
-## 5. Repository Structure  
+# Build project
+mvn clean compile
 
-```
-DAA_Assik2/
-├── src/
-│   ├── main/java/algorithms/ShellSort.java
-│   ├── main/java/metrics/PerformanceTracker.java
-│   └── main/java/cli/BenchmarkRunner.java
-│
-│   └── test/java/algorithms/ShellSortTest.java
-│
-├── README.md
-├── pom.xml
-├── results.csv
-└── results.pdf
-```
+# Run tests
+mvn test
 
+# Run benchmarks
+mvn exec:java -Dexec.mainClass="cli.BenchmarkRunner"
 
+# Create JAR
+mvn package
+java -jar target/assignment2-shellsort-1.0.0.jar
 
----
+🚀 Programmatic Usage
+Example Code:
+import algorithms.ShellSort;
+import metrics.PerformanceTracker;
 
-## 6. Conclusion  
+public class Example {
+    public static void main(String[] args) {
+        // Basic usage
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        ShellSort.sort(arr, ShellSort.GapSequence.SHELL);
+        // arr is now sorted: [11, 12, 22, 25, 34, 64, 90]
 
-Among the three tested gap sequences, **Sedgewick’s sequence** provided the best balance of speed and efficiency.  
-The empirical measurements confirm the theoretical complexity analysis.  
-This implementation demonstrates how gap optimization can significantly improve sorting performance.  
+        // With performance tracking
+        PerformanceTracker tracker = new PerformanceTracker();
+        ShellSort.sort(arr, ShellSort.GapSequence.KNUTH, tracker);
 
----
+        tracker.startTiming();
+        ShellSort.sort(arr, ShellSort.GapSequence.SEDGEWICK, tracker);
+        tracker.stopTiming();
 
-## 7. References  
+        tracker.printMetrics();
+        // Outputs: comparisons, swaps, execution time, memory usage
+    }
+}
 
-- Shell, D.L. (1959). *A High-Speed Sorting Procedure*. Communications of the ACM.  
-- Knuth, D.E. (1998). *The Art of Computer Programming, Vol. 3: Sorting and Searching.*  
-- Sedgewick, R. (1986). *Analysis of Shellsort and Related Algorithms.*  
+📊 CLI and Benchmarking
+Quick Benchmark with Default Sizes:
+java -cp target/assignment2-shellsort-1.0.0.jar cli.BenchmarkRunner
 
----
+Create JAR:
+mvn package
+java -jar target/assignment2-shellsort-1.0.0.jar
 
-## 8. How to Run  
+🧪 Performance Tracking and Benchmark Results
+Performance Metrics:
 
-To run benchmarks from the command line:  
+The algorithm tracks the following metrics:
 
-```bash
-mvn compile
-mvn exec:java -Dexec.mainClass="cli.BenchmarkRunner" -Dexec.args="--sequence SEDGEWICK --n 10000"
+Comparisons
 
----
+Swaps
+
+Array Accesses
+
+Execution Time (in ns and ms)
+
+CSV Data Example:
+sequence,distribution,n,time_ns,time_ms,comparisons,swaps,array_accesses
+SHELL,random,10000,10703500,10,703500,266695,151724,658429
+SHELL,random,10000,1919500,1,919500,264830,149879,654719
+SHELL,random,10000,1861000,1,861000,263092,148136,651238
+sequence,distribution,n,time_ns,time_ms,comparisons,swaps,array_accesses
+SHELL,random,10000,10595500,10,595500,266695,151724,658429
+SHELL,random,10000,2287800,2,287800,264830,149879,654719
+SHELL,random,10000,1762900,1,762900,263092,148136,651238
+sequence,distribution,n,time_ns,time_ms,comparisons,swaps,array_accesses
+KNUTH,random,10000,10175200,10,175200,229065,158208,537759
+KNUTH,random,10000,1560700,1,560700,244184,173201,567871
+KNUTH,random,10000,1403800,1,403800,239350,168444,558280
+sequence,distribution,n,time_ns,time_ms,comparisons,swaps,array_accesses
+SEDGEWICK,random,10000,9853100,9,853100,195625,107364,489363
+SEDGEWICK,random,10000,1847400,1,847400,196538,108285,491197
+SEDGEWICK,random,10000,1267900,1,267900,198103,109876,494353
+
+📊 Benchmark Graphs
+
+From the CSV data, we can generate the following performance graphs:
+
+Time vs Input Size
+
+Comparisons vs Input Size
+
+Swaps vs Input Size
+
+These graphs help visualize how the algorithm performs as the input size grows.
+
+🧑‍💻 Unit Tests
+
+The implementation is tested through various cases, including:
+
+Empty array
+
+Single element
+
+Sorted array
+
+Reversed array
+
+Array with duplicates
+
+Example Test Cases:
+@Test
+public void testEmpty() {
+    int[] a = new int[0];
+    PerformanceTracker pt = new PerformanceTracker();
+    ShellSort.sort(a, ShellSort.GapSequence.SHELL, pt);
+    assertEquals(0, a.length);
+}
+
+@Test
+public void testSingle() {
+    int[] a = new int[]{42};
+    PerformanceTracker pt = new PerformanceTracker();
+    ShellSort.sort(a, ShellSort.GapSequence.KNUTH, pt);
+    assertArrayEquals(new int[]{42}, a);
+}
+
+@Test
+public void testSorted() {
+    int[] a = new int[]{1, 2, 3, 4, 5, 6};
+    PerformanceTracker pt = new PerformanceTracker();
+    ShellSort.sort(a, ShellSort.GapSequence.SEDGEWICK, pt);
+    assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6}, a);
+}
+
+📢 Conclusion
+
+Shell Sort provides efficient O(n log n) sorting performance with in-place memory usage.
+
+Performance Tracking helps identify key metrics, such as comparisons, swaps, and execution time.
+
+The algorithm performs well across different distributions, including sorted, reversed, and nearly sorted arrays.
