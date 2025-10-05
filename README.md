@@ -3,21 +3,21 @@ Shell Sort Algorithm - Report
 Student B, Pair 2: Advanced Sorting Algorithms
 Algorithm: Shell Sort with Multiple Gap Sequences (Shell, Knuth, Sedgewick)
 
-📋 Algorithm Overview
+ Algorithm Overview
 
 Shell Sort is an in-place comparison-based sorting algorithm that generalizes insertion sort to allow the exchange of items that are far apart. The algorithm improves on insertion sort by allowing the comparison and exchange of elements that are distant from each other, reducing the amount of shifting needed when compared to the standard insertion sort.
 
 Key Features:
 
-✅ In-place sorting: O(1) auxiliary space.
+ In-place sorting: O(1) auxiliary space.
 
-✅ Multiple gap sequences: Uses Shell, Knuth, and Sedgewick gap sequences to optimize sorting performance.
+ Multiple gap sequences: Uses Shell, Knuth, and Sedgewick gap sequences to optimize sorting performance.
 
-✅ Improved performance over Insertion Sort: Reduces the number of comparisons and swaps in practice.
+ Improved performance over Insertion Sort: Reduces the number of comparisons and swaps in practice.
 
-✅ Adaptable: You can experiment with different gap sequences for varying performance results.
+ Adaptable: You can experiment with different gap sequences for varying performance results.
 
-🧮 Complexity Analysis
+ Complexity Analysis
 Time Complexity:
 Case	Complexity	Explanation
 Best Case	Θ(n log n)	When the input is nearly sorted, Shell Sort is efficient with small gaps.
@@ -35,7 +35,7 @@ Auxiliary Space: Θ(1) - sorts in-place.
 
 Total Space: Θ(n) - input array only.
 
-🚀 Quick Start
+ Quick Start
 Prerequisites:
 
 Java 17 or higher
@@ -62,7 +62,7 @@ mvn exec:java -Dexec.mainClass="cli.BenchmarkRunner"
 mvn package
 java -jar target/assignment2-shellsort-1.0.0.jar
 
-🚀 Programmatic Usage
+ Programmatic Usage
 Example Code:
 import algorithms.ShellSort;
 import metrics.PerformanceTracker;
@@ -87,7 +87,7 @@ public class Example {
     }
 }
 
-📊 CLI and Benchmarking
+ CLI and Benchmarking
 Quick Benchmark with Default Sizes:
 java -cp target/assignment2-shellsort-1.0.0.jar cli.BenchmarkRunner
 
@@ -95,7 +95,7 @@ Create JAR:
 mvn package
 java -jar target/assignment2-shellsort-1.0.0.jar
 
-🧪 Performance Tracking and Benchmark Results
+ Performance Tracking and Benchmark Results
 Performance Metrics:
 
 The algorithm tracks the following metrics:
@@ -126,7 +126,7 @@ SEDGEWICK,random,10000,9853100,9,853100,195625,107364,489363
 SEDGEWICK,random,10000,1847400,1,847400,196538,108285,491197
 SEDGEWICK,random,10000,1267900,1,267900,198103,109876,494353
 
-📊 Benchmark Graphs
+ Benchmark Graphs
 
 From the CSV data, we can generate the following performance graphs:
 
@@ -138,7 +138,7 @@ Swaps vs Input Size
 
 These graphs help visualize how the algorithm performs as the input size grows.
 
-🧑‍💻 Unit Tests
+ Unit Tests
 
 The implementation is tested through various cases, including:
 
@@ -177,7 +177,7 @@ public void testSorted() {
     assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6}, a);
 }
 
-📢 Conclusion
+ Conclusion
 
 Shell Sort provides efficient O(n log n) sorting performance with in-place memory usage.
 
