@@ -58,18 +58,18 @@ These findings match the theoretical predictions: better-designed gap sequences 
 ## 5. Repository Structure  
 
 ```
-assignment2-shellsort/
+DAA_Assik2/
 ├── src/
-│   ├── main/java/
-│   │   ├── algorithms/ShellSort.java
-│   │   ├── metrics/PerformanceTracker.java
-│   │   └── cli/BenchmarkRunner.java
-│   └── test/java/
-│       └── algorithms/ShellSortTest.java
-├── docs/
-│   └── results.csv
+│   ├── main/java/algorithms/ShellSort.java
+│   ├── main/java/metrics/PerformanceTracker.java
+│   └── main/java/cli/BenchmarkRunner.java
+│
+│   └── test/java/algorithms/ShellSortTest.java
+│
+├── README.md
 ├── pom.xml
-└── README.md
+├── results.csv
+└── results.pdf
 ```
 
 
